@@ -74,3 +74,14 @@ The router computes a dynamic basename and normalizes `index.html` paths so clie
 ## Recommended next step
 
 Use this template as your baseline and copy only the features you need into a new app to keep scope small and maintainable.
+
+```
+npx degit SergioCantera/code-apps/template#main my-app
+cd my-app
+
+npm install
+
+pac code init --environment [environmentId] --displayName [appDisplayName]
+
+npm run dev
+```
