@@ -1,0 +1,55 @@
+name: CI/CD Pipeline
+env:
+  SOLUTION_NAME: 'TestCodeApps'
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Install Power Platform CLI via .NET
+        shell: pwsh
+        run: |
+          dotnet tool install --global Microsoft.PowerApps.CLI.Tool --version 2.2.1
+          "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Verify power.config.json exists
+        shell: pwsh
+        run: |
+          if (-Not (Test-Path "./power.config.json")) {
+            Write-Error "power.config.json not found in $pwd"
+            Get-ChildItem -Force
+            exit 1
+          }
+
+      - name: Authenticate to Dataverse
+        shell: pwsh
+        run: |
+          pac auth create --url ${{ secrets.ENVIRONMENT_URL }} --applicationId ${{ secrets.CLIENT_ID }} --clientSecret ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
+          pac auth who
+
+      - name: Publish App to Environment
+        shell: pwsh
+        run: |
+          pac code push --environment ${{ secrets.ENVIRONMENT_URL }} --solutionName ${{ env.SOLUTION_NAME }}
+      
