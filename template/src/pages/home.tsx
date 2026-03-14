@@ -3,11 +3,12 @@ import powerAppsLogo from "/power-apps.svg"
 import reactLogo from "@/assets/react.svg"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { toast } from "sonner"
+import {useT} from "@/lib/i18n"
 
 export default function HomePage() {
   const [count, setCount] = useState(0)
+  const {t} = useT()
 
   return (
     <div className="h-full grid place-items-center">
@@ -30,7 +31,7 @@ export default function HomePage() {
           </a>
         </div>
 
-        <h1 className="text-5xl leading-tight tracking-tight">Power + Code</h1>
+        <h1 className="text-5xl leading-tight tracking-tight">{t.home.heading}</h1>
 
         <Card>
           <CardContent className="flex flex-col items-center space-y-4">
@@ -44,14 +45,13 @@ export default function HomePage() {
         </Card>
 
         <div className="flex items-center justify-center gap-4">
-          <Button variant="outline" onClick={() => toast.info("Hello from Power Apps!")}>
+          <Button variant="outline" onClick={() => toast.info(t.home.toast.infoHome)}>
             !
           </Button>
-          <ThemeToggle />
         </div>
 
         <p className="text-muted-foreground text-sm">
-          Click on the Power Apps and React logos to learn more
+          {t.home.subHeading}
         </p>
       </div>
     </div>
