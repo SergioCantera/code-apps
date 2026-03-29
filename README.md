@@ -9,6 +9,7 @@ It is designed as a starter workspace to explore app patterns, generated Power d
 - `examples/shopping-cart-app`: Product catalog + cart flow using React components and local cart state.
 - `examples/todo-app`: Todo management example with chat-style agent interaction.
 - `template`: Reusable TypeScript template with routing, UI primitives, theme handling, and project conventions.
+- `template-replit`: Reusable template easily adapted and configured from projects done with Replit.
 
 ## Tech stack
 
@@ -27,6 +28,7 @@ It is designed as a starter workspace to explore app patterns, generated Power d
 │   ├── shopping-cart-app/
 │   └── todo-app/
 ├── template/
+├── template-replit/
 └── README.md
 ```
 
