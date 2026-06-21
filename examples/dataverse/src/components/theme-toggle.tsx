@@ -8,9 +8,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useTheme } from "@/hooks/use-theme"
+import type {Theme} from '@/providers/theme-provider'
+
+const THEME_OPTIONS: { code: Theme, label: string, flag: string }[] = [
+  { code: 'light', label: 'Light', flag: '🌞' },
+  { code: 'dark', label: 'Dark', flag: '🌜' },
+  { code: 'system', label: 'System', flag: '💻' },
+]
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   return (
     <DropdownMenu>
@@ -22,15 +29,19 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
+        {THEME_OPTIONS.map((option) => (
+            <DropdownMenuItem 
+            key={option.code}
+            onClick={() => setTheme(option.code)}
+            className={`gap-2 text-sm ${theme === option.code ? 'font-semibold text-primary' : ''}`}
+            data-testid={`theme-option-${option.code}`}
+            >
+            <span>{option.flag}</span>
+              <span>{option.label}</span>
+              {theme === option.code && <span className="ml-auto text-primary text-[10px]">✓</span>}
+          </DropdownMenuItem>
+        )
+      )}
       </DropdownMenuContent>
     </DropdownMenu>
   )

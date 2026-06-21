@@ -33,7 +33,6 @@ export const TodoProvider = ({ children }) => {
       if (result.data) {
           const todos = result.data;
           setTodos(todos);
-          //console.log(`Retrieved ${todos.length} todos`);
       }
       } catch (err) {
           console.error('Failed to retrieve todos:', err);
@@ -67,7 +66,6 @@ export const TodoProvider = ({ children }) => {
     const changes = {
       siero_done: todos.find(({ siero_todoid}) => siero_todoid === id).siero_done ? false : true
     }
-    console.log('changes: ',changes);
     try {
       await Siero_todosService.update(id, changes);
       setTodos(prevTodos =>

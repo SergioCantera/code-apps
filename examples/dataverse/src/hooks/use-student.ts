@@ -7,10 +7,11 @@ import {
   useRemoveSubjectFromStudent,
 } from '@/hooks/use-subject'
 import {type StudentForm} from '@/pages/students'
+import {queryKeys} from '@/lib/queryKeys'
 
 export const useAllStudents = () => {
   const {data: students, isLoading: loadingStudents, error: errorStudents}= useQuery({
-    queryKey: ['students'],
+    queryKey: queryKeys.student.all,
     queryFn: async () => {
       // Simulate fetching students from an API or database
       const result = await Siero_studentsService.getAll();
@@ -18,7 +19,10 @@ export const useAllStudents = () => {
         return result.data
       }
       return [];
-    }
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+    refetchOnWindowFocus: false
   })
 
   return {
@@ -30,7 +34,7 @@ export const useAllStudents = () => {
 
 export const useStudentById = (id: string) => {
   const {data: student, isLoading: loadingStudent, error: errorStudent}= useQuery({
-    queryKey: ['student', id],
+    queryKey: queryKeys.student.byId(id),
     queryFn: async () => {
       // Simulate fetching a single student by ID from an API or database
       const result = await Siero_studentsService.get(id);
@@ -40,6 +44,9 @@ export const useStudentById = (id: string) => {
       return null;
     },
     enabled: !!id, // Only run this query if an ID is provided
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+    refetchOnWindowFocus: false
   })
 
   return {
@@ -65,7 +72,7 @@ export const useCreateStudent = () => {
     },
     onSuccess: () => {
       // Invalidate and refetch the student data after a successful create
-      queryClient.invalidateQueries({queryKey: ['students']});
+      queryClient.invalidateQueries({queryKey: queryKeys.student.all});
     }
   })
 
@@ -88,7 +95,7 @@ export const useUpdateStudent = () => {
     },
     onSuccess: () => {
       // Invalidate and refetch the student data after a successful update
-      queryClient.invalidateQueries({queryKey: ['students']});
+      queryClient.invalidateQueries({queryKey: queryKeys.student.all});
     }
   })
 
@@ -145,7 +152,7 @@ export const useSaveStudentWithSubjects = () => {
       return true
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ['students']})
+      queryClient.invalidateQueries({queryKey: queryKeys.student.all});
     },
   })
 

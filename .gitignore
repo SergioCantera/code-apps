@@ -1,0 +1,14 @@
+# Local environment files
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# macOS system files
+.DS_Store
+
+# Build output
+node_modules/
+dist/
+dist-mcp/
+coverage/

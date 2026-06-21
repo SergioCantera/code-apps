@@ -3,8 +3,9 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import type { Siero_student_subjects } from '@/generated/models/Siero_student_subjectsModel'
 import type { Siero_subjects } from '@/generated/models/Siero_subjectsModel'
 import { Siero_subjectsService } from '@/generated/services/Siero_subjectsService'
-//import { Siero_student_siero_subjectsetService } from '@/generated/services/Siero_student_siero_subjectsetService'
 import {  Siero_student_subjectsService } from '@/generated/services/Siero_student_subjectsService'
+import {queryKeys} from '@/lib/queryKeys'
+
 
 const getSubjectsByIds = async (subjectIds: string[]): Promise<Siero_subjects[]> => {
   if (subjectIds.length === 0) {
@@ -43,7 +44,7 @@ export const getSubjectsByStudentId = async (studentId: string): Promise<Siero_s
 
 export const useAllSubjects = () => {
   const { data: subjects, isLoading: loadingSubjects, error: errorSubjects } = useQuery({
-    queryKey: ['subjects'],
+    queryKey: queryKeys.subject.all,
     queryFn: async () => {
       const result = await Siero_subjectsService.getAll()
       if (result.data) {
@@ -51,6 +52,10 @@ export const useAllSubjects = () => {
       }
       return []
     },
+    staleTime: Infinity, // Subjects don't change often, so we can consider them always fresh
+    gcTime: Infinity, // Keep subjects in cache indefinitely
+    refetchOnWindowFocus: false, // Don't refetch subjects on window focus
+    refetchOnReconnect: false, // Don't refetch subjects on reconnect
   })
 
   return {
@@ -62,7 +67,7 @@ export const useAllSubjects = () => {
 
 export const useSubjectById = (subjectId: string | null) => {
   const { data: subject, isLoading: loadingSubject, error: errorSubject } = useQuery({
-    queryKey: ['subject', subjectId],
+    queryKey: queryKeys.subject.byId(subjectId ?? ''),
     enabled: Boolean(subjectId),
     queryFn: async () => {
       if (!subjectId) return null
@@ -70,6 +75,9 @@ export const useSubjectById = (subjectId: string | null) => {
       const result = await Siero_subjectsService.get(subjectId)
       return result.data ?? null
     },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+    refetchOnWindowFocus: false, // Don't refetch links on window focus
   })
 
   return {
@@ -85,7 +93,7 @@ export const useSubjectsByStudentId = (studentId: string | null) => {
     isLoading: loadingLinks,
     error: errorLinks,
   } = useQuery({
-    queryKey: ['student-subject-links', studentId],
+    queryKey: queryKeys.student_subject.links(studentId ?? ''),
     enabled: Boolean(studentId),
     queryFn: async () => {
       const result = await Siero_student_subjectsService.getAll({
@@ -99,6 +107,9 @@ export const useSubjectsByStudentId = (studentId: string | null) => {
 
       return []
     },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+    refetchOnWindowFocus: false, // Don't refetch links on window focus
   })
 
   const subjectIds = useMemo(() => {
@@ -114,7 +125,7 @@ export const useSubjectsByStudentId = (studentId: string | null) => {
     isLoading: loadingSubjectsById,
     error: errorSubjectsById,
   } = useQuery({
-    queryKey: ['subjects-by-student', studentId, subjectIds.join(',')],
+    queryKey: queryKeys.subject.byMultipleIds(studentId ?? '', subjectIds),
     enabled: Boolean(studentId) && subjectIds.length > 0,
     queryFn: async () => getSubjectsByIds(subjectIds),
   })
@@ -146,7 +157,7 @@ export const useAddSubjectToStudent = () => {
     },
     onSuccess: () => {
       // Invalidate and refetch the student data after a successful update
-      queryClient.invalidateQueries({queryKey: ['students']});
+      queryClient.invalidateQueries({queryKey: queryKeys.student.all});
     }
   })
 
@@ -173,7 +184,7 @@ export const useRemoveSubjectFromStudent = () => {
     },
     onSuccess: () => {
       // Invalidate and refetch the student data after a successful update
-      queryClient.invalidateQueries({queryKey: ['students']});
+      queryClient.invalidateQueries({queryKey: queryKeys.student.all});
     }
   })
 

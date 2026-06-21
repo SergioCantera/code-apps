@@ -35,6 +35,37 @@ const translations = {
       title: "Home",
       heading: "Power + Code",
       subHeading: "Click on the Power Apps and React logos to learn more",
+      hero: {
+        badge: "Your future starts today",
+        title: "Learn technology with real projects and accelerate your professional career",
+        description: "Intensive training, personalized mentoring, and a community that supports you from the first module to your first job opportunity.",
+        primaryCta: "View programs",
+        secondaryCta: "Talk to an advisor",
+      },
+      testimonials: {
+        badge: "Testimonials",
+        title: "What our former students say",
+        items: [
+          {
+            quote:
+              "The classes gave me a solid foundation to enter the job market. In less than 4 months, I got my first role as a junior developer.",
+            name: "Laura V.",
+            role: "Frontend Developer",
+          },
+          {
+            quote:
+              "I learned with real-world projects and very close mentors. The best part was graduating with a portfolio ready for technical interviews.",
+            name: "Miguel A.",
+            role: "Full Stack Developer",
+          },
+          {
+            quote:
+              "I came from a different field and thought programming was not for me. The personalized support made all the difference.",
+            name: "Sofia R.",
+            role: "Product Analyst",
+          },
+        ],
+      },
       toast: {
         infoHome: "Hello from Power Apps!",
       }
@@ -101,13 +132,40 @@ const translations = {
       title: "Inicio",
       heading: "Power + Code",
       subHeading: "Haz clic en los logos de Power Apps y React para obtener más información.",
+      hero: {
+        badge: "Tu futuro empieza hoy",
+        title: "Aprende tecnologia con proyectos reales y acelera tu carrera profesional",
+        description: "Formacion intensiva, mentoring personalizado y una comunidad que te acompana desde el primer modulo hasta tu primera oportunidad laboral.",
+        primaryCta: "Ver programas",
+        secondaryCta: "Hablar con un asesor",
+      },
+      testimonials: {
+        badge: "Testimonios",
+        title: "Lo que cuentan nuestros antiguos estudiantes",
+        items: [
+          {
+            quote:
+              "Las clases me dieron una base real para entrar al mercado laboral. En menos de 4 meses consegui mi primer trabajo como desarrolladora junior.",
+            name: "Laura V.",
+            role: "Frontend Developer",
+          },
+          {
+            quote:
+              "Aprendi con proyectos reales y mentores muy cercanos. Lo mejor fue salir con un portfolio listo para entrevistas tecnicas.",
+            name: "Miguel A.",
+            role: "Full Stack Developer",
+          },
+          {
+            quote:
+              "Venia de otro sector y pensaba que programar no era para mi. El acompanamiento personalizado hizo toda la diferencia.",
+            name: "Sofia R.",
+            role: "Product Analyst",
+          },
+        ],
+      },
       toast: {
         infoHome: "¡Hola desde Power Apps!",
       }
-    },
-    test: {
-      heading: "Página TEST",
-      description: "Esta es una página para probar la navegación del router."
     },
     students: {
       heading: "Estudiantes",

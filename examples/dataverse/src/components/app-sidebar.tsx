@@ -11,7 +11,7 @@ import {
   SidebarHeader,
   SidebarFooter
 } from '@/components/ui/sidebar'
-import {Home, Settings, HelpCircle, TestTube, GraduationCap} from 'lucide-react'
+import {Home, Settings, HelpCircle, GraduationCap} from 'lucide-react'
 import powerAppsLogo from '@/assets/power-apps.svg'
 import {useT} from '@/lib/i18n';
 
@@ -22,7 +22,6 @@ export function AppSidebar() {
   const navItems = [
     { title: t.nav.home, url: "/home", icon: Home },
     { title: t.nav.students, url: "/students", icon: GraduationCap },
-    { title: t.nav.test, url: "/test", icon: TestTube },
   ]
 
   return (
