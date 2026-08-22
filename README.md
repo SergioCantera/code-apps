@@ -1,11 +1,13 @@
 # Power Apps Code Apps Playground
 
-This repository contains practical examples and a reusable template for building **Power Apps Code Apps** with **React** and **Vite**.
+This repository contains practical examples and 2 reusable templates for building **Power Apps Code Apps** with **React** and **Vite**.
 
 It is designed as a starter workspace to explore app patterns, generated Power data services, and modern frontend structure for Code Apps.
 
 ## What is inside
 
+- `examples/chat-app`: Chat interface example with AI-powered agent interaction.
+- `examples/dataverse`: Example demonstrating integration with Microsoft Dataverse.
 - `examples/shopping-cart-app`: Product catalog + cart flow using React components and local cart state.
 - `examples/todo-app`: Todo management example with chat-style agent interaction.
 - `template`: Reusable TypeScript template with routing, UI primitives, theme handling, and project conventions.
@@ -25,6 +27,8 @@ It is designed as a starter workspace to explore app patterns, generated Power d
 ```text
 .
 ├── examples/
+│   ├── chat-app/
+│   ├── dataverse/
 │   ├── shopping-cart-app/
 │   └── todo-app/
 ├── template/
@@ -35,7 +39,7 @@ It is designed as a starter workspace to explore app patterns, generated Power d
 ## Prerequisites
 
 - Node.js 18+ (Node 20 LTS recommended)
-- npm
+- npm (pnpm recommended)
 - (Optional) Power Platform tools and environment access if you plan to connect real data sources
 
 ## Getting started
