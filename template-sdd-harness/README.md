@@ -1,4 +1,4 @@
-# Power Apps React Template (TypeScript)
+# Power Apps React Template (TypeScript) with SDD harness
 
 This template provides a production-ready starting point for building Power Apps Code Apps with React, TypeScript, and Vite.
 
@@ -12,6 +12,7 @@ It includes:
 - React Query provider wiring
 - Toast notifications with Sonner
 - Tailwind CSS v4 integration
+- SDD harness for testing and debugging
 
 ## Tech stack
 
@@ -25,21 +26,23 @@ It includes:
 ## Prerequisites
 
 - Node.js 18+ (Node 22 LTS recommended)
-- npm
+- pnpm
+- @microsoft/power-apps
+- @microsoft/power-apps-cli
 
 ## Run locally
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## Available scripts
 
-- `npm run dev`: Start development server
-- `npm run build`: Type-check and create production build
-- `npm run preview`: Preview production build
-- `npm run lint`: Run ESLint
+- `pnpm dev`: Start development server
+- `pnpm build`: Type-check and create production build
+- `pnpm preview`: Preview production build
+- `pnpm lint`: Run ESLint
 
 ## Project structure
 
@@ -87,7 +90,7 @@ cd my-app
 
 pnpm install
 
-pac code init --environment [environmentId] --displayName [appDisplayName]
+pa app init --display-name [appDisplayName] --environment-id [environmentId]
 
-pnpm dev
+pa app run
 ```

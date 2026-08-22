@@ -1,0 +1,28 @@
+{
+  "project": "MyProject",
+  "description": "This is a sample feature list for MyProject.",
+  "rules": {
+    "one_feature_at_a_time": true,
+    "require_tests_to_close": true,
+    "require_approved_spec_to_implement": true,
+    "valid_status": ["pending", "spec_ready", "in_progress", "done", "blocked"],
+    "sdd_required_when": "feature_has \"sdd\": true"
+  },
+  "features": [
+    {
+      "id": 1,
+      "name": "note_search",
+      "title": "Implement Note Search Filter",
+      "description": "Allow users to filter the list of notes dynamically through a search input fields matching text against title or body.",
+      "acceptance": [
+        "The system should display a text input field for typing the search query.",
+        "The notes list should update dynamically in-memory as the user types without full page reloads.",
+        "The filter must be case-insensitive and scan both the note title and body fields.",
+        "If no results match the query, a clean fallback UI state showing 'No results found' must be rendered.",
+        "The search logic and UI components must be fully covered by automated tests."
+      ],
+      "sdd": true,
+      "status": "pending"
+    }
+  ]
+}
