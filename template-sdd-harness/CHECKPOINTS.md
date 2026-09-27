@@ -8,8 +8,8 @@
 
 - [ ] The 4 base files exist: `AGENTS.md`, `init.sh`, `feature_list.json`,
       `progress/current.md`.
-- [ ] The 3 docs exist: `docs/architecture.md`, `docs/conventions.md`,
-      `docs/verification.md`.
+- [ ] The 4 docs exist: `docs/architecture.md`, `docs/conventions.md`,
+      `docs/verification.md`, `docs/specs.md`.
 - [ ] `./init.sh` exits with code 0.
 
 ## C2 — The state is coherent
