@@ -91,6 +91,11 @@ New features follow a spec-driven development flow:
 2. Create `design.md` with the technical decisions and data flow.
 3. Create `tasks.md` with an executable implementation checklist.
 4. Get human approval before moving from `spec_ready` to implementation.
+5. The reviewer runs the required `pnpm build` production check and approves
+   only when the complete feature is correct.
+6. After review approval, the leader asks whether to run `pa app push`.
+   Pushing to Power Platform is optional and requires explicit human approval;
+   skipping it does not block feature completion.
 
 See [`docs/specs.md`](docs/specs.md) for the complete workflow and feature states.
 
@@ -108,3 +113,8 @@ pa app init --display-name [appDisplayName] --environment-id [environmentId]
 
 pa app run
 ```
+
+After a reviewer approves a feature, the leader may ask whether to run
+`pa app push`. If the push fails, preserve the error, fix the relevant
+authentication, CLI, build-output, or `environmentId` configuration issue,
+and request approval again before retrying. Push retries are never automatic.

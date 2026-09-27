@@ -24,8 +24,13 @@ changes. Do not edit code.
    - Does it respect `docs/conventions.md`? (naming conventions, explicit TypeScript types, no `any`, proper error handling boundaries)
    - Does it have its corresponding test without over-mocking internal React states?
 6. Run `./init.sh`. It must finish completely green, verifying both TypeScript (`tsc --noEmit`) and the full test runner execution.
-7. Go through `CHECKPOINTS.md`. Mark `[x]` for those met, `[ ]` for those not.
-8. Issue verdict.
+7. Run `pnpm build` from the project root. This is the mandatory production
+   build gate for the completed feature. If it fails, diagnose the issue and
+   reject the implementation with the required changes; do not approve until
+   the build passes.
+8. Go through `CHECKPOINTS.md`. Mark `[x]` for those met, `[ ]` for those not.
+9. Issue verdict. The leader may ask about the optional `pa app push` only
+   after an `APPROVED` verdict.
 
 ## Verdict Format
 

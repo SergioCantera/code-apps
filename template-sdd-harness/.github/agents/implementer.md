@@ -35,7 +35,8 @@ You are an implementer. Your job is to execute **a single** feature from
 6. **Traceability**: confirm that each `R<n>` is covered by at least
    one concrete test case. Note it in `progress/impl_<name>.md`
    (map `R<n> → test description / case name`).
-7. **Do not mark `done` yourself.** Wait for the reviewer.
+7. **Do not mark `done` yourself.** Wait for the reviewer and the leader's
+   optional Power Platform push decision after review.
 8. If the reviewer approves (the leader will tell you in a second invocation):
    change the status to `done` in `feature_list.json` and move the session summary to `progress/history.md`.
 

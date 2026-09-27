@@ -53,17 +53,22 @@
 4. Once approved, the leader changes the status to `in_progress` and launches `implementer`.
 5. The implementer executes `tasks.md` one by one, marking them `[x]`.
 6. The reviewer verifies TypeScript compilation, traceability `R<n>` ↔ test, and completed tasks; approves or rejects.
-7. If approved, the implementer marks `done` in `feature_list.json` and moves the summary to `progress/history.md`.
+7. The reviewer runs the required `pnpm build` and approves only when the complete feature is correct.
+8. After reviewer approval, the leader asks the human whether to run `pa app push`.
+   The push is optional; record an approval, skip, deferral, or failure and continue closure unless deployment was explicitly required.
+9. If approved, the implementer marks `done` in `feature_list.json` and moves the summary to `progress/history.md`.
 
 ## 5. Session Closure (lifecycle)
 
 Before ending:
 
 1. Run `./init.sh` — all green.
-2. If the task is finished: mark `status: "done"` in `feature_list.json`.
-3. Move the summary from `progress/current.md` to the end of `progress/history.md`.
-4. Empty `progress/current.md` leaving only the template.
-5. Do not leave temporary files, `console.log()` debug statements, or TODOs without context.
+2. Confirm the reviewer passed `pnpm build` — the production build must pass after feature implementation.
+3. Record the human's optional `pa app push` decision and outcome, if attempted.
+4. If the task is finished: mark `status: "done"` in `feature_list.json`.
+5. Move the summary from `progress/current.md` to the end of `progress/history.md`.
+6. Empty `progress/current.md` leaving only the template.
+7. Do not leave temporary files, `console.log()` debug statements, or TODOs without context.
 
 ## 6. If you get stuck
 

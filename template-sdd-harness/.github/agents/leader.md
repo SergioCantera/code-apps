@@ -49,6 +49,39 @@ Check the status of the first feature that is not `done` / not `blocked` in
    `acceptance`.
 3. When finished → launch **1 `reviewer`** to verify TypeScript type-safety (`tsc --noEmit`), components/domain test suites execution, traceability tests ↔ requirements, and ensure `tasks.md` is complete.
 
+### Review, build, and optional push
+
+Launch the reviewer after the implementer completes the feature and
+`./init.sh`. The reviewer is responsible for verifying correctness, including
+the required production build. Only after the reviewer approves should the
+leader ask the human whether to push the built Code App to the configured
+Power Platform environment.
+
+- If the reviewer requests changes, do not ask about pushing; return to the
+  implementer workflow.
+- If the human approves after review, run `pa app push` from the Code App
+  project root.
+- If the human declines or defers, record `push skipped by human` and
+  continue normal session closure.
+- If `pa app push` fails, stop and record the complete error output. Classify
+  the failure before proposing a fix:
+  - Missing or stale build output: return to the reviewer/build gate and run
+    `pnpm build` again.
+  - Authentication or expired token: ask the human to reauthenticate with
+    `pa auth logout`, then retry only after explicit approval.
+  - Missing or incorrect environment configuration: inspect
+    `power.config.json` and ask the human to correct the `environmentId` or
+    rerun `pa app init`; never invent or silently change an environment ID.
+  - CLI unavailable or unresolved: verify the project-local CLI and resolve
+    it with the supported wrapper, such as `npx --no-install pa`, while the
+    deployment operation remains `pa app push`.
+    After remediation, ask for approval again before retrying. Do not retry
+    silently, and do not undo reviewer approval unless the human explicitly
+    makes deployment a release requirement.
+
+Never run `pa app push` without explicit human approval. This checkpoint does
+not create environments, authenticate, or select an environment.
+
 ### Case C — status == `spec_ready` WITHOUT human approval
 
 Do not continue. The human has not yet reviewed the spec. Remind them of their task.
