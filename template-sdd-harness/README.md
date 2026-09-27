@@ -43,6 +43,9 @@ pnpm dev
 - `pnpm build`: Type-check and create production build
 - `pnpm preview`: Preview production build
 - `pnpm lint`: Run ESLint
+- `pnpm test`: Run the test suite once
+- `pnpm test:watch`: Run tests in watch mode
+- `pnpm tsc`: Run the TypeScript compiler check
 
 ## Project structure
 
@@ -80,12 +83,23 @@ The router computes a dynamic basename and normalizes `index.html` paths so clie
 - Place shared visual components in `src/components/ui/`.
 - Add API/data access and cache logic through `src/providers/query-provider.tsx` and related hooks.
 
+## SDD workflow
+
+New features follow a spec-driven development flow:
+
+1. Create `requirements.md` using verifiable EARS requirements.
+2. Create `design.md` with the technical decisions and data flow.
+3. Create `tasks.md` with an executable implementation checklist.
+4. Get human approval before moving from `spec_ready` to implementation.
+
+See [`docs/specs.md`](docs/specs.md) for the complete workflow and feature states.
+
 ## Recommended next step
 
 Use this template as your baseline and copy only the features you need into a new app to keep scope small and maintainable.
 
 ```
-npx degit SergioCantera/code-apps/template-replit#main my-app
+npx degit SergioCantera/code-apps/template-sdd-harness#main my-app
 cd my-app
 
 pnpm install

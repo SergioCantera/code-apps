@@ -1,6 +1,6 @@
 # Power Apps Code Apps Playground
 
-This repository contains practical examples and 2 reusable templates for building **Power Apps Code Apps** with **React** and **Vite**.
+This repository contains practical examples and 3 reusable templates for building **Power Apps Code Apps** with **React** and **Vite**.
 
 It is designed as a starter workspace to explore app patterns, generated Power data services, and modern frontend structure for Code Apps.
 
@@ -12,6 +12,7 @@ It is designed as a starter workspace to explore app patterns, generated Power d
 - `examples/todo-app`: Todo management example with chat-style agent interaction.
 - `template`: Reusable TypeScript template with routing, UI primitives, theme handling, and project conventions.
 - `template-replit`: Reusable template easily adapted and configured from projects done with Replit.
+- `template-sdd-harness`: React and TypeScript template with Wouter routing, theme and language support, shared UI components, React Query, and an SDD harness for testing and debugging.
 
 ## Tech stack
 
@@ -21,6 +22,7 @@ It is designed as a starter workspace to explore app patterns, generated Power d
 - Tailwind CSS (used by selected projects)
 - Zustand (shopping cart app)
 - TypeScript (template project)
+- Wouter and TanStack React Query (SDD harness template)
 
 ## Repository structure
 
@@ -33,6 +35,7 @@ It is designed as a starter workspace to explore app patterns, generated Power d
 │   └── todo-app/
 ├── template/
 ├── template-replit/
+├── template-sdd-harness/
 └── README.md
 ```
 
@@ -89,6 +92,23 @@ Available scripts:
 - `npm run build`: Type-check and create production build
 - `npm run preview`: Preview production build locally
 - `npm run lint`: Run ESLint
+
+### 4) SDD Harness Template
+
+```bash
+cd template-sdd-harness
+pnpm install
+pnpm dev
+```
+
+Available scripts:
+
+- `pnpm dev`: Start development server
+- `pnpm build`: Type-check and create production build
+- `pnpm preview`: Preview production build
+- `pnpm lint`: Run ESLint
+
+This template requires Node.js 18+ (Node 22 LTS recommended), pnpm, and the Power Apps CLI.
 
 ## Notes
 
